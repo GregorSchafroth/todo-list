@@ -1,0 +1,18 @@
+[
+  {
+    "emoji": "🛒",
+    "name": "Groceries",
+    "items": [
+      { "id": "1", "emoji": "🥛", "text": "Buy milk", "completed": false },
+      { "id": "2", "emoji": "🥖", "text": "Buy bread", "completed": true }
+    ]
+  },
+  {
+    "emoji": "💼",
+    "name": "Work tasks",
+    "items": [
+      { "id": "1", "emoji": "📑", "text": "Finish report", "completed": false },
+      { "id": "2", "emoji": "📧", "text": "Email client", "completed": true }
+    ]
+  }
+]

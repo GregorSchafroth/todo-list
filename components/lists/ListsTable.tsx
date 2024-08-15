@@ -8,53 +8,77 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import Link from 'next/link';
-import lists from '@/data/lists';
+import lists from '@/data/TodoLists.json';
 import { TodoList } from '@/types/lists';
 import { useRouter } from 'next/navigation';
 
-interface TodoListProps {
-  name?: string;
+interface Item {
+  id: string;
+  emoji: string;
+  text: string;
 }
 
-const ListsTable = ({ name }: TodoListProps) => {
+interface List {
+  _id: string;
+  name: string;
+  emoji: string;
+  items: Item[];
+}
+
+interface TodoListProps {
+  lists: List[];
+}
+
+const ListsTable = ({ lists }: TodoListProps) => {
+// const ListsTable = () => {
   const router = useRouter();
 
-  const handleRowClick = (id: number) => {
-    router.push(`/lists/${id}/edit`);
+  const handleRowClick = (id: string) => {
+    router.push(`/lists/${id}`);
   };
 
   return (
-    <div className='rounded-md border'>
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead>Name</TableHead>
-            <TableHead>Items</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {lists.map((list) => (
-            <TableRow key={list.id} onClick={() => handleRowClick(list.id)}>
-              <TableCell className='flex gap-2'>
-                <div>{list.emoji}</div>
-                <div>{list.name}</div>
-              </TableCell>
-              <TableCell>
-                {list.items.map((item) => (
-                  <div key={item.id}>
-                    <div className='flex gap-2'>
-                      <div>{item.emoji}</div>
-                      <div>{item.text}</div>
-                    </div>
-                  </div>
-                ))}
-              </TableCell>
+    <>
+      <div className='rounded-md border'>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Name</TableHead>
+              <TableHead>Items</TableHead>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </div>
+          </TableHeader>
+          <TableBody>
+            {lists ? (
+              lists.map((list) => (
+                <TableRow
+                  key={list._id}
+                  onClick={() => handleRowClick(list._id)}
+                >
+                  <TableCell className='flex gap-2'>
+                    <div>{list.emoji}</div>
+                    <div>{list.name}</div>
+                  </TableCell>
+                  <TableCell>
+                    {list.items.map((item) => (
+                      <div key={item.id}>
+                        <div className='flex gap-2'>
+                          <div>{item.emoji}</div>
+                          <div>{item.text}</div>
+                        </div>
+                      </div>
+                    ))}
+                  </TableCell>
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell>No items found</TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+      </div>
+    </>
   );
 };
 

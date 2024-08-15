@@ -1,4 +1,4 @@
-import { ArrowLeftCircle } from 'lucide-react';
+import { CirclePlus } from 'lucide-react';
 import Link from 'next/link';
 
 interface BackButtonProps {
@@ -14,7 +14,7 @@ const BackButton = ({ text, link }: BackButtonProps) => {
       href={link}
       className='text-gray-500 hover:underline flex items-center gap-1'
     >
-      <ArrowLeftCircle size={18} /> {text}
+      <CirclePlus size={18} /> {text}
     </Link>
   );
 };

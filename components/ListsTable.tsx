@@ -46,6 +46,7 @@ const ListsTable = ({ lists }: TodoListProps) => {
             <TableRow>
               <TableHead>Name</TableHead>
               <TableHead>Items</TableHead>
+              <TableHead></TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>

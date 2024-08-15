@@ -38,7 +38,7 @@ const ItemsTable = ({ list }: ItemsTableProps) => {
   const handleRemoveItem = async (itemId: string) => {
     try {
       // Update the state locally to remove the item
-      const updatedItems = items.filter(item => item.id !== itemId);
+      const updatedItems = items.filter((item) => item.id !== itemId);
       setItems(updatedItems);
 
       // Send a request to the backend to remove the item from the database
@@ -70,6 +70,7 @@ const ItemsTable = ({ list }: ItemsTableProps) => {
         <TableHeader>
           <TableRow>
             <TableHead>Items</TableHead>
+            <TableHead></TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -84,14 +85,19 @@ const ItemsTable = ({ list }: ItemsTableProps) => {
                 </TableCell>
                 <TableCell className='text-right'>
                   <div className='flex justify-end'>
-                    <CircleMinus className='text-red-500 hover:text-red-400 cursor-pointer' onClick={() => handleRemoveItem(item.id)} />
+                    <CircleMinus
+                      className='text-red-500 hover:text-red-400 cursor-pointer'
+                      onClick={() => handleRemoveItem(item.id)}
+                    />
                   </div>
                 </TableCell>
               </TableRow>
             ))
           ) : (
             <TableRow>
-              <TableCell className='text-gray-400 italic'>No items found</TableCell>
+              <TableCell className='text-gray-400 italic'>
+                No items found
+              </TableCell>
             </TableRow>
           )}
         </TableBody>

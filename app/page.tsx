@@ -2,7 +2,6 @@ import ListsTable from '@/components/ListsTable';
 import connectDB from '@/config/database';
 import List from '@/models/List';
 import PlusButton from '@/components/PlusButton';
-import lists from '@/data/TodoLists.json';
 
 interface TodoItem {
   id: string;

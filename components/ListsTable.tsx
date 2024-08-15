@@ -12,6 +12,7 @@ import lists from '@/data/TodoLists.json';
 import { TodoList } from '@/types/lists';
 import { ArrowRightCircle } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { useState, useEffect } from 'react';
 
 interface Item {
   id: string;
@@ -31,8 +32,11 @@ interface TodoListProps {
 }
 
 const ListsTable = ({ lists }: TodoListProps) => {
-  // const ListsTable = () => {
   const router = useRouter();
+
+  useEffect(() => {
+    router.refresh();
+  }, []);
 
   const handleRowClick = (id: string) => {
     router.push(`/lists/${id}`);
@@ -73,10 +77,7 @@ const ListsTable = ({ lists }: TodoListProps) => {
                   </TableCell>
                   <TableCell className='text-right'>
                     <div className='flex justify-end'>
-                      <ArrowRightCircle
-                        className='text-gray-500 hover:text-gray-400'
-    
-                      />
+                      <ArrowRightCircle className='text-gray-500 hover:text-gray-400' />
                     </div>
                   </TableCell>
                 </TableRow>

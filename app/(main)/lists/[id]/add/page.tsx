@@ -1,8 +1,9 @@
-import ListsTable from '@/components/lists/ListsTable';
-import connectDB from '@/config/database';
-import List from '@/models/List';
+import BackButton from '@/components/BackButton';
 import PlusButton from '@/components/PlusButton';
-import lists from '@/data/TodoLists.json';
+import ItemsTable from '@/components/lists/ItemsTable';
+import connectDB from '@/config/database';
+import List from '@/models/List'
+import AddItem from '@/components/AddItem'
 
 interface TodoItem {
   id: string;
@@ -18,7 +19,13 @@ interface TodoList {
   items: TodoItem[];
 }
 
-const HomePage = async () => {
+interface ListPageProps {
+  params: {
+    id: string;
+  };
+}
+
+const ListEditPage = async ({ params }: ListPageProps) => {
   await connectDB();
 
   // Fetch the lists from the database
@@ -37,13 +44,20 @@ const HomePage = async () => {
     })),
   }));
 
+  const list = lists.find((list) => list._id === params.id) ?? null;
+
+  if (list === null){
+    return <div>List not found</div>
+  }
+
   return (
     <div className='m-2 flex flex-col gap-4'>
-      <h1 className='font-bold'>Todo List</h1>
-      <ListsTable lists={lists} />
-      <PlusButton text='Add List' link='#' />
+      <BackButton text='Lists' link='/' />
+      <h1 className='font-bold'>{`${list.emoji} ${list.name}`}</h1>
+      <ItemsTable list={list} />
+      <AddItem id={list._id} />
     </div>
   );
 };
 
-export default HomePage;
+export default ListEditPage;

@@ -1,4 +1,6 @@
-import { Schema, model, models } from 'mongoose';
+import mongoose from 'mongoose';
+
+const { Schema, model, models } = mongoose;
 
 // Define the schema for the items array
 const ItemSchema = new Schema({
@@ -7,7 +9,6 @@ const ItemSchema = new Schema({
   text: String,
   completed: Boolean,
 });
-
 
 // Define the main List schema
 const ListSchema = new Schema({

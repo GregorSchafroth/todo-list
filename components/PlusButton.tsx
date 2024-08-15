@@ -14,7 +14,7 @@ const BackButton = ({ text, link }: BackButtonProps) => {
       href={link}
       className='text-gray-500 hover:underline flex items-center gap-1'
     >
-      <CirclePlus size={18} /> {text}
+      <CirclePlus /> {text}
     </Link>
   );
 };

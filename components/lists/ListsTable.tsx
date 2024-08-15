@@ -52,6 +52,7 @@ const ListsTable = ({ lists }: TodoListProps) => {
               lists.map((list) => (
                 <TableRow
                   key={list._id}
+                  className='cursor-pointer'
                   onClick={() => handleRowClick(list._id)}
                 >
                   <TableCell className='flex gap-2'>

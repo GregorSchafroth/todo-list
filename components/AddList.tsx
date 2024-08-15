@@ -3,7 +3,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-
 import { Button } from '@/components/ui/button';
 import {
   Form,
@@ -18,21 +17,17 @@ import { Input } from '@/components/ui/input';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
-interface AddItemProps {
-  id: string;
-}
-
 const formSchema = z.object({
-  item: z.string().trim().min(1, { message: "Item cannot be empty" }),
+  name: z.string().trim().min(1, { message: 'Name cannot be empty' }),
 });
 
-const AddItem = ({ id }: AddItemProps) => {
+const AddList = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      item: '',
+      name: '',
     },
   });
 
@@ -41,31 +36,27 @@ const AddItem = ({ id }: AddItemProps) => {
   const handleSubmit = async (data: z.infer<typeof formSchema>) => {
     setIsSubmitting(true);
     try {
-      const newItem = {
-        id: new Date().toISOString(), // or generate ID as needed
+      const newList = {
+        name: data.name,
         emoji: '', // Add logic to handle emoji if necessary
-        text: data.item,
-        completed: false,
+        items: [],
       };
 
-      const response = await fetch('/api/add-item', {
+      const response = await fetch('/api/add-list', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          listId: id,
-          item: newItem,
-        }),
+        body: JSON.stringify(newList),
       });
 
       if (!response.ok) {
-        throw new Error('Failed to add item');
+        throw new Error('Failed to add list');
       }
 
-      router.push(`/lists/${id}`);
+      router.push('/');
 
-      router.refresh()
+      router.refresh();
     } catch (error) {
       console.error(error);
     }
@@ -79,20 +70,22 @@ const AddItem = ({ id }: AddItemProps) => {
       >
         <FormField
           control={form.control}
-          name='item'
+          name='name'
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <Input placeholder='type item here...' {...field} />
+                <Input placeholder='type name here...' {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
-        <Button type='submit' disabled={isSubmitting}>{isSubmitting ? 'Creating...' : 'Add Item'}</Button>
+        <Button type='submit' disabled={isSubmitting}>
+          {isSubmitting ? 'Creating...' : 'Add List'}
+        </Button>
       </form>
     </Form>
   );
 };
 
-export default AddItem;
+export default AddList;

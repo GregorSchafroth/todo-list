@@ -1,8 +1,7 @@
 import ListsTable from '@/components/ListsTable';
 import connectDB from '@/config/database';
 import List from '@/models/List';
-import PlusButton from '@/components/PlusButton';
-import lists from '@/data/TodoLists.json';
+import AddList from '@/components/AddList';
 
 interface TodoItem {
   id: string;
@@ -41,7 +40,7 @@ const HomePage = async () => {
     <div className='m-2 flex flex-col gap-4'>
       <h1 className='font-bold'>Todo List</h1>
       <ListsTable lists={lists} />
-      <PlusButton text='Add List' link='/add' />
+      <AddList />
     </div>
   );
 };

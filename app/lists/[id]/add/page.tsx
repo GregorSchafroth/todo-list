@@ -1,6 +1,5 @@
 import BackButton from '@/components/BackButton';
-import PlusButton from '@/components/PlusButton';
-import ItemsTable from '@/components/lists/ItemsTable';
+import ItemsTable from '@/components/ItemsTable';
 import connectDB from '@/config/database';
 import List from '@/models/List'
 import AddItem from '@/components/AddItem'

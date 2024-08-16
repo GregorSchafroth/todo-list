@@ -18,7 +18,7 @@ interface TodoList {
 const HomePage = async () => {
   return (
     <div className='m-2 flex flex-col gap-4'>
-      <h1 className='font-bold'>Todo List</h1>
+      <h1 className='font-bold flex gap-2'><div>📝</div><div>Todo List</div></h1>
       <ListsTable />
       <PlusButton text='Add List' link='/add' />
     </div>

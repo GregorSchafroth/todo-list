@@ -101,7 +101,8 @@ const ListsTable = () => {
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead className='w-2/5'>Name</TableHead>
+            <TableHead></TableHead>
+            <TableHead>Name</TableHead>
             <TableHead>Items</TableHead>
             <TableHead></TableHead>
           </TableRow>
@@ -110,11 +111,17 @@ const ListsTable = () => {
           {lists && lists.length > 0 ? (
             lists.map((list) => (
               <TableRow key={list._id}>
-                <TableCell className='relative'>
-                  <div
-                    className='absolute inset-0 flex items-center gap-2 cursor-pointer pl-4 truncate'
-                    onClick={() => handleRowClick(list._id)}
-                  >
+                <TableCell
+                  className='cursor-pointer'
+                  onClick={() => handleRowClick(list._id)}
+                >
+                  <ArrowRightCircle />
+                </TableCell>
+                <TableCell
+                  className='cursor-pointer'
+                  onClick={() => handleRowClick(list._id)}
+                >
+                  <div className='flex gap-2'>
                     <div>{list.emoji}</div>
                     <div>{list.name}</div>
                   </div>

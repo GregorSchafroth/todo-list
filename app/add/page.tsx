@@ -20,8 +20,7 @@ const HomePage = async () => {
   return (
     <div className='m-2 flex flex-col gap-4'>
       <BackButton text='Lists' link='/' />
-      <h1 className='font-bold'>Todo List</h1>
-      <ListsTable />
+      <h1 className='font-bold'>Add List</h1>
       <AddList />
     </div>
   );
